@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ==========Page Header Section Start Here========== -->
+<section class="page-header-section style-1 bg-pink">
+    <div class="container">
+        <div class="page-header-content">
+            <div class="page-header-inner">
+                <div class="page-title">
+                    <h2>Our Git Repo's</h2>
+                </div>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Members</li>
+                </ol>
+
+                {% for msg in messages %}
+                <div class="alert alert-success alert-dismissible fade show" id="message" role="alert">
+                    <strong>{{ msg }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Page Header Section Ends Here========== -->
+
+
+<!-- ==========Member page Section Start Here========== -->
+<section class="member-page-section">
+    <div class="container">
+        <div class="member-filter">
+            <div class="member-filter-inner">
+                <!-- <form action="" method="get" class="filter-form">
+                    {{filter.form}}
+                    <button class="lab-btn" type="submit">Search now <i class="icofont-search-2"></i></button>
+                </form> -->
+            </div>
+        </div>
+        <div class="member-wrapper">
+
+            <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center">
+                {% for user in users %}
+
+                {% if user.user != userIn %}
+
+                {% if userIn not in user.blocked_by.all %}
+
+                <div class="col">
+                    <div class="lab-item member-item style-1 style-2">
+                        <div class="lab-inner">
+                            <div class="lab-thumb">
+                                <img src="{{user.profile_image.url}}" alt="member-img">
+                            </div>
+                            <div class="lab-content">
+                                <h6><a href="{% url 'user-detail' user.pk %}">{{user.full_name}}, {{user.age}}</a> </h6>
+                                <p>Tech Stack-{{user.tech_stack}}</p>
+                                <br>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <form action="{% url 'like' user.pk %}" method="POST">
+                                        {% csrf_token %}
+                                        <!--  -->
+                                        {% if userIn not in user.likeability.all %}
+                                        <!-- <button class="like-btn" type="submit" , name="user_id" , value="{{user.id}}">
+                                            <i class="far fa-heart"></i>
+                                        </button> -->
+
+                                        <button class="nav-link" id="pills-favorites-tab" type="submit" , name="user_id"
+                                            , value="{{user.id}}"><i class="icofont-heart-beat"></i>
+                                        </button>
+                                        {% else %}
+                                        <button class="nav-link" id="pills-favorites-tab" type="submit" , name="user_id"
+                                            , value="{{user.id}}"><i class="icofont-heart-alt"></i>
+                                        </button>
+                                        {% endif %}
+                                    </form>
+                                    <form action="{% url 'block' user.pk %}" method="POST">
+                                        {% csrf_token %}
+                                        <!-- <button class="block-btn" type="submit" , name="user_id" , value="{{user.id}}">
+                                            <i class="far fa-times-circle"></i>
+                                        </button> -->
+                                        <button class="nav-link" id="pills-favorites-tab" type="submit" , name="user_id"
+                                            , value="{{user.id}}"><i class="icofont-close-circled"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% endif %}
+
+                {% endfor %}
+
+
+            </div>
+            <div class="paginations">
+                <ul class="lab-ul d-flex flex-wrap justify-content-center mb-1">
+                    <li>
+                        <a href="#"><i class="icofont-rounded-double-left"></i></a>
+                    </li>
+                    <li>
+                        <a href="#">1</a>
+                    </li>
+                    <li class="d-none d-sm-block">
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">...</a>
+                    </li>
+                    <li class="d-none d-sm-block">
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icofont-rounded-double-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Member page Section Ends Here========== -->
+
+{% endblock %}

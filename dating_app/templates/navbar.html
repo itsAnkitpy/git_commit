@@ -1,0 +1,87 @@
+{% load static %}
+
+<!-- preloader start here -->
+<div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- preloader ending here -->
+
+
+
+
+<!-- ==========Header Section Starts Here========== -->
+<header class="header-section">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-top-area">
+                <ul class="left">
+                    <li>
+                        <i class="icofont-ui-call"></i> <span>+123-4567 6587</span>
+                    </li>
+                    <li>
+                        <i class="icofont-location-pin"></i> Shimla, Himachal Pradesh
+                    </li>
+                </ul>
+                <ul class="social-icons d-flex align-items-center">
+                    <li>
+                        <p>
+                            Find us on :
+                        </p>
+                    </li>
+                    <li>
+                        <a href="#" class="fb"><i class="icofont-facebook-messenger"></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="vimeo"><i class="icofont-vimeo"></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="skype"><i class="icofont-skype"></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="rss"><i class="icofont-rss-feed"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'images/logo/git_commit.png' %}" alt="logo">
+                    </a>
+                </div>
+                <div class="menu-area">
+                    <ul class="menu">
+                        
+                    </ul>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profile-page' %}" class="login"><i class="icofont-user"></i> <span>MY PROFILE</span> </a>
+                        <a href="{% url 'logout' %}" class="signup"> <span>LOGOUT</span> </a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
+                        <a href="{% url 'register' %}" class="signup"><i class="icofont-users"></i> <span>SIGN UP</span> </a>
+                    {% endif %}
+                    <!-- toggle icons -->
+                    <div class="header-bar d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="ellepsis-bar d-lg-none">
+                        <i class="icofont-info-square"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<style>
+    .messages {
+        min-height: 100vh;
+        margin: auto;
+      }
+      .message {
+        display: flex;
+        position: relative;
+        margin: auto;
+        padding: 10px;
+        max-width: 40rem;
+        align-items: center;
+        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+        margin-bottom: 20px;
+      }
+      .message__detail {
+        padding: 10px;
+        border-right: 2px solid #515151;
+      }
+      
+      .message__image {
+        height: 100px;
+        border-radius: 50%;
+      }
+      
+      .message__date {
+        color: lightslategray;
+      }
+      .message__content {
+        margin: 15px;
+      }
+      .message__msg {
+        margin: 0 auto;
+      }
+      .mark-read {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background: none;
+        border: 0;
+      }
+      .mark-read i {
+        margin: 5px;
+      }
+      
+      .burger a {
+        position: relative;
+      }
+      .burger span {
+        position: absolute;
+        right: -20px;
+        top: -15px;
+        background: #26a69a;
+        color: white;
+        font-weight: thin;
+      }
+      .read {
+        position: absolute;
+        top: 1px;
+        right: 20px;
+      }
+      
+      #msg-badge {
+        position: absolute;
+        right: -10px;
+      }
+      #match-btn {
+        position: relative;
+      }
+      .remove-btn {
+        position: absolute;
+        color: black;
+        bottom: 10px;
+        right: 10px;
+      }
+      
+      
+</style>
+
+    
+
+<!-- ==========Page Header Section Start Here========== -->
+<section class="page-header-section style-1 bg-pink">
+    <div class="container">
+        <div class="page-header-content">
+            <div class="page-header-inner">
+                <div class="page-title">
+                    <h2>Messages</h2>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Page Header Section Ends Here========== -->
+
+<!-- Contact Us Section Start Here -->
+<div class="contact-section bg-ash">
+    <div class="contact-top padding-tb aside-bg padding-b">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <article class="contact-form-wrapper">
+                        <div class="contact-form">
+                            <section class="messages">
+                                {% if msgs %}
+                                  {% for msg in msgs %}
+                                      <div class="message">
+                                          <div class="message__detail">
+                                              <img class="message__image" src='{{msg.author.profile.profile_image.url}}' />
+                                              <p class="message__authort">{{msg.author.profile.full_name}}</p>
+                                              <p class="message__date">{{msg.date_posted|date:"D/m/y - H:i"}}</p>
+                                          </div>
+                                          <div class="message__content">
+                                              <p class="message__msg">{{msg.content}}</p>
+                                          </div>
+                                          <form method="POST", action="{% url 'mark-read' msg.pk %}">
+                                              {% csrf_token %}
+                                              {% if not msg.status %}
+                                                  <button class="mark-read" name="msg_id" value="{{msg.id}}"><i class="tiny material-icons"></i>Mark as Read</button>
+                                              {% else %}
+                                                  <p class="read">Message Seen</p>
+                                              {% endif %}
+                                          </form>
+                                          <a href="{% url 'delete-message' msg.pk %}" class="remove-btn"><i class="material-icons">Delete Permanently</i></a>
+                                      </div>
+                                  {% endfor %}
+                                {% else %}
+                                    <section class="page-header-section style-1 bg-pink">
+                                        <div class="container">
+                                            <div class="page-header-content">
+                                                <div class="page-header-inner">
+                                                    <div class="page-title">
+                                                        <h2>You have no messages currently :(</h2>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                {% endif %}
+                                
+                            </section>
+                            
+                        </div>
+                    </article>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
+{% endblock %}
