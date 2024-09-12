@@ -23,22 +23,21 @@
 <!-- ==========Page Header Section Ends Here========== -->
 
 <!-- ==========login Section start Here========== -->
-<div class="login-section padding-tb bg-ash">
-    <div class=" container">
+<div class="login-section padding-tb">
+    <div class="container">
         <div class="account-wrapper">
             <h3 class="title">Login</h3>
             {% for msg in messages %}
-            <p id="messages">{{ msg }}</p>
+            <p id="messages" class="alert alert-info">{{ msg }}</p>
             {% endfor %}
             <form class="account-form" action="" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    <!-- <input type="text" placeholder="User Name" name="username"> -->
-                    {{ login_form|crispy }}
+                    <input type="text" name="username" placeholder="Username" required>
                 </div>
-                <!-- <div class="form-group">
-                    <input type="password" placeholder="Password" name="password">
-                </div> -->
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
                 <div class="form-group">
                     <div class="d-flex justify-content-between flex-wrap pt-sm-2">
                         <div class="checkgroup">
@@ -49,31 +48,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="d-block lab-btn"><span>Submit Now</span></button>
+                    <button type="submit" class="d-block lab-btn"><span>Login</span></button>
                 </div>
             </form>
             <div class="account-bottom">
-                <span class="d-block cate pt-10">Don’t Have any Account? <a href="signup.html"> Sign
-                        Up</a></span>
-                <span class="or"><span>or</span></span>
-                <h5 class="subtitle">Login With Social Media</h5>
-                <ul class="social-media social-color lab-ul d-flex justify-content-center">
-                    <li>
-                        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="pinterest"><i class="icofont-pinterest"></i></a>
-                    </li>
-                </ul>
+                <span class="d-block cate pt-10">Don't Have an Account? <a href="{% url 'register' %}">Sign Up</a></span>
             </div>
         </div>
     </div>

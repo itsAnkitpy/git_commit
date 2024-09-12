@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'dating_app.apps.DatingAppConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'crispy_bootstrap4',
     'django_filters',
 ]
 

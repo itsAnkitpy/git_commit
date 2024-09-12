@@ -27,19 +27,31 @@
     <div class="container">
         <div class="account-wrapper">
             <h3 class="title">Register Now</h3>
-            {{form.errors}}
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors }}
+                </div>
+            {% endif %}
             <form class="account-form" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    {{ form|crispy }}
+                    <input type="text" name="{{ form.username.name }}" class="form-control" placeholder="Username" required>
                 </div>
-                
+                <div class="form-group">
+                    <input type="email" name="{{ form.email.name }}" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="{{ form.password1.name }}" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="{{ form.password2.name }}" class="form-control" placeholder="Confirm Password" required>
+                </div>
                 <div class="form-group">
                     <button type="submit" class="d-block lab-btn"><span>Get Started Now</span></button>
                 </div>
             </form>
-            <div class="account-bottom">
-                <span class="d-block cate pt-10">Are you a member? <a href="login.html">Login</a></span>
+            <!-- <div class="account-bottom">
+                <span class="d-block cate pt-10">Are you a member? <a href="{% url 'login' %}">Login</a></span>
                 <span class="or"><span>or</span></span>
                 <h5 class="subtitle">Register With Social Media</h5>
                 <ul class="social-media social-color justify-content-center d-flex lab-ul">
@@ -59,7 +71,7 @@
                         <a href="#" class="pinterest"><i class="icofont-pinterest"></i></a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -69,6 +81,7 @@
 
     //Query All input fields
     var form_fields = document.getElementsByTagName('input')
+
 
     for (var field in form_fields) {
         form_fields[field].className += 'form-group'

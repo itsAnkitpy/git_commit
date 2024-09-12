@@ -1,0 +1,12 @@
+# Demo users info
+
+# Michael - jackson@123\
+# Diana - hayden@123\
+# Amanda - haust@123\
+# Ian - kellen@123\
+# Rohit - sharma@123
+# Shikha - shikha@123
+# Eroz - bhatt@123
+
+
+# source env/bin/activate

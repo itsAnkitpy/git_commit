@@ -3,6 +3,48 @@
 
 {% block content %}
 
+<!-- Add this style block right after the opening content block -->
+<style>
+    .edit-profile-widget {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .edit-profile-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .edit-profile-form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .edit-profile-form input,
+    .edit-profile-form select,
+    .edit-profile-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+    }
+
+    .edit-profile-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .edit-profile-form button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
 <!-- ==========Page Header Section Start Here========== -->
 <section class="page-header-section style-1 bg-pink">
     <div class="container">
@@ -96,168 +138,181 @@
                         
                         <!-- Profile tab -->
                         <div class="tab-pane activity-page show active fade" id="profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div>
-                                <div class="row">
-                                    <div class="col-xl-8">
-                                        <article>
-                                            <div class="info-card mb-20">
-                                                <div class="info-card-title">
-                                                    <h6>My Basics</h6>
-                                                </div>
-                                                <div class="info-card-content">
-                                                    <ul class="info-list">
-                                                        <li>
-                                                            <p class="info-name">Name</p>
-                                                            <p class="info-details">{{ user.profile.full_name }}</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Age</p>
-                                                            <p class="info-details">{{ user.profile.age }}</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">I'm a</p>
-                                                            <p class="info-details">{{ user.profile.gender }}</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Preferred OS</p>
-                                                            <p class="info-details">{{user.profile.os}}</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Preferred Editor</p>
-                                                            <p class="info-details">{{user.profile.editor}}</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Tech Stack</p>
-                                                            <p class="info-details">{{user.profile.tech_stack}}</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Likes</p>
-                                                            <p class="info-details">{{likes}}</p>
-                                                        </li>
-                                                        
-                                                    </ul>
-
-                                                </div>
+                            <div class="row">
+                                <div class="col-xl-8">
+                                    <article>
+                                        <div class="info-card mb-20">
+                                            <div class="info-card-title">
+                                                <h6>My Basics</h6>
                                             </div>
-                                            <div class="info-card mb-20">
-                                                <div class="info-card-title">
-                                                    <h6>Short Bio</h6>
-                                                </div>
-                                                <div class="info-card-content">
-                                                    <p>{{ user.profile.bio }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="info-card mb-20">
-                                                <div class="info-card-title">
-                                                    <h6>Looking For</h6>
-                                                </div>
-                                                <div class="info-card-content">
-                                                    <ul class="info-list">
-                                                        <li>
-                                                            <p class="info-name">Things I'm looking for</p>
-                                                            <p class="info-details">I want a funny person</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Whatever I like</p>
-                                                            <p class="info-details">I like to travel a lot</p>
-                                                        </li>
-                                                    </ul>
+                                            <div class="info-card-content">
+                                                <ul class="info-list">
+                                                    <li>
+                                                        <p class="info-name">Name</p>
+                                                        <p class="info-details">{{ user.profile.full_name }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Age</p>
+                                                        <p class="info-details">{{ user.profile.age }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">I'm a</p>
+                                                        <p class="info-details">{{ user.profile.gender }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Preferred OS</p>
+                                                        <p class="info-details">{{user.profile.os}}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Preferred Editor</p>
+                                                        <p class="info-details">{{user.profile.editor}}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Tech Stack</p>
+                                                        <p class="info-details">{{user.profile.get_tech_stack_display}}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Likes</p>
+                                                        <p class="info-details">{{likes}}</p>
+                                                    </li>
+                                                    
+                                                    
+                                                </ul>
 
-                                                </div>
                                             </div>
-                                            <div class="info-card mb-20">
-                                                <div class="info-card-title">
-                                                    <h6>Lifestyle</h6>
-                                                </div>
-                                                <div class="info-card-content">
-                                                    <ul class="info-list">
-                                                        <li>
-                                                            <p class="info-name">Interest</p>
-                                                            <p class="info-details">Dogs,Cats</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Favorite vocations spot</p>
-                                                            <p class="info-details">Maldives, Bangladesh</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Looking for</p>
-                                                            <p class="info-details">Serious Relationshiop,Affair</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Smoking</p>
-                                                            <p class="info-details">Casual Smoker</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Language</p>
-                                                            <p class="info-details">English, French, Italian</p>
-                                                        </li>
-                                                    </ul>
-
-                                                </div>
+                                        </div>
+                                        <div class="info-card mb-20">
+                                            <div class="info-card-title">
+                                                <h6>Short Bio</h6>
                                             </div>
-                                            <div class="info-card">
-                                                <div class="info-card-title">
-                                                    <h6>Physical info</h6>
-                                                </div>
-                                                <div class="info-card-content">
-                                                    <ul class="info-list">
-                                                        <li>
-                                                            <p class="info-name">Height</p>
-                                                            <p class="info-details">5'8 ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Weight</p>
-                                                            <p class="info-details">72 kg</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Hair Color</p>
-                                                            <p class="info-details">Black</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Eye Color</p>
-                                                            <p class="info-details">Brown</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Body Type</p>
-                                                            <p class="info-details">Tall</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="info-name">Ethnicity</p>
-                                                            <p class="info-details">Middle Eastern</p>
-                                                        </li>
-                                                    </ul>
-
-                                                </div>
+                                            <div class="info-card-content">
+                                                <p>{{ user.profile.bio }}</p>
                                             </div>
-                                        </article>
-                                    </div>
+                                        </div>
+                                        <!-- <div class="info-card mb-20">
+                                            <div class="info-card-title">
+                                                <h6>Looking For</h6>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <ul class="info-list">
+                                                    <li>
+                                                        <p class="info-name">Things I'm looking for</p>
+                                                        <p class="info-details">I want a funny person</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Whatever I like</p>
+                                                        <p class="info-details">I like to travel a lot</p>
+                                                    </li>
+                                                </ul>
 
-                                    <!-- Aside Part -->
-                                    <div class="col-xl-4">
-                                        <aside class="mt-5 mt-xl-0">
-                                            <div class="widget search-widget">
-                                                <div class="widget-inner">
-                                                    <div class="widget-title">
-                                                        <h5>Edit Profile</h5>
-                                                    </div>
-                                                    <div class="widget-content">
-                                                        <p>Your Perfect Match is Just a Click Away.</p>
-                                                        <form action="" class="banner-form" method="POST" enctype="multipart/form-data">
-                                                            {% csrf_token %}
-                                                            <div class="gender">
-                                                                <div class="custom-select right w-100">
-                                                                    {{form}}
-                                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="info-card mb-20">
+                                            <div class="info-card-title">
+                                                <h6>Lifestyle</h6>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <ul class="info-list">
+                                                    <li>
+                                                        <p class="info-name">Interests</p>
+                                                        <p class="info-details">{{ user.profile.interests }}</p>
+                                                    </li>
+                                                    <!-- <li>
+                                                        <p class="info-name">Favorite vocations spot</p>
+                                                        <p class="info-details">Maldives, Bangladesh</p>
+                                                    </li> -->
+                                                    <li>
+                                                        <p class="info-name">Looking for</p>
+                                                        <p class="info-details">{{ user.profile.seeking|upper}}</p>
+                                                    </li>
+                                                    <!-- <li>
+                                                        <p class="info-name">Smoking</p>
+                                                        <p class="info-details">Casual Smoker</p>
+                                                    </li> -->
+                                                    <li>
+                                                        <p class="info-name">Languages known</p>
+                                                        <p class="info-details">{{ user.profile.languages }}</p>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                        <!-- <div class="info-card">
+                                            <div class="info-card-title">
+                                                <h6>Physical info</h6>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <ul class="info-list">
+                                                    <li>
+                                                        <p class="info-name">Height</p>
+                                                        <p class="info-details">5'8 ft</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Weight</p>
+                                                        <p class="info-details">72 kg</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Hair Color</p>
+                                                        <p class="info-details">Black</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Eye Color</p>
+                                                        <p class="info-details">Brown</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Body Type</p>
+                                                        <p class="info-details">Tall</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">Ethnicity</p>
+                                                        <p class="info-details">Middle Eastern</p>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div> -->
+                                    </article>
+                                </div>
+
+                                <!-- Edit Profile Form -->
+                                <div class="col-xl-4">
+                                    <aside class="mt-5 mt-xl-0">
+                                        <div class="widget edit-profile-widget">
+                                            <div class="widget-inner">
+                                                <div class="widget-title">
+                                                    <h5>Edit Profile</h5>
+                                                </div>
+                                                <div class="widget-content">
+                                                    <form action="" method="POST" enctype="multipart/form-data" class="edit-profile-form">
+                                                        {% csrf_token %}
+                                                        {% for field in form %}
+                                                            <div class="form-group">
+                                                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                                                {% if field.name == 'tech_stack' %}
+                                                                    <select name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control">
+                                                                        {% for value, display_name in field.field.choices %}
+                                                                            <option value="{{ value }}" {% if value == field.value %}selected{% endif %}>
+                                                                                {{ display_name }}
+                                                                            </option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                {% else %}
+                                                                    {{ field }}
+                                                                {% endif %}
+                                                                {% if field.help_text %}
+                                                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                                                {% endif %}
+                                                                {% for error in field.errors %}
+                                                                    <div class="invalid-feedback">{{ error }}</div>
+                                                                {% endfor %}
                                                             </div>
-                                                            <button type="submit" class="">Update Profile</button>
-
-                                                        </form>
-                                                    </div>
+                                                        {% endfor %}
+                                                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                                                    </form>
                                                 </div>
                                             </div>
-                                            
-                                        </aside>
-                                    </div>
+                                        </div>
+                                    </aside>
                                 </div>
                             </div>
                         </div>

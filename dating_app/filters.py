@@ -15,3 +15,8 @@ class UserFilter(django_filters.FilterSet):
         fields = "__all__"
         exclude = ["user", 'profile_image', 'bio', 'tech_stack',
                    'full_name', 'age', 'gender', 'likeability', 'blocked_by', 'editor', 'os', 'spacing']
+        filter_overrides = {
+            models.JSONField: {
+                'filter_class': django_filters.CharFilter,  # or another appropriate filter
+            },
+        }

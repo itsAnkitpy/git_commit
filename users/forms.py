@@ -17,3 +17,13 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = "__all__"
         exclude = ["likeability", 'user','blocked_by']
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['full_name', 'age', 'gender', 'os', 'editor', 'tech_stack', 'bio','spacing']
+        widgets = {
+            'tech_stack': forms.Select(attrs={'class': 'form-control','required': False}),
+            # ... other widgets ...
+        }
