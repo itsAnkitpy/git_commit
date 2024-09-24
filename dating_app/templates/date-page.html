@@ -55,7 +55,11 @@
                     <div class="lab-item member-item style-1 style-2">
                         <div class="lab-inner">
                             <div class="lab-thumb">
-                                <img src="{{user.profile_image.url}}" alt="member-img">
+                                {% if user.profile_image %}
+                                    <img src="{{ user.profile_image.url }}" alt="member-img">
+                                {% else %}
+                                    <img src="{% static 'default.jpg' %}" alt="Default member image">  <!-- Use the correct path to your default image -->
+                                {% endif %}
                             </div>
                             <div class="lab-content">
                                 <h6><a href="{% url 'user-detail' user.pk %}">{{user.full_name}}, {{user.age}}</a> </h6>

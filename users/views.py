@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import UserRegisterForm, ProfileUpdateForm
+from .forms import UserRegisterForm, ProfileUpdateForm, ProfileForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate,logout
 from django.contrib import messages
@@ -51,7 +51,7 @@ def logout_request(request):
 def profile(req):
     user = req.user
     profile = Profile.objects.get(user=user)
-    likes = profile.num_likes
+    likes = user.likes.all()  # Fetch users who have liked the current user
     unreadMessages = Message.objects.filter(
         receiver=req.user).filter(status=False).count()
     if req.method == "POST":

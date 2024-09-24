@@ -38,7 +38,11 @@
                     </div>
                     <div class="profile-information">
                         <div class="profile-pic">
-                            <img src="{{object.profile_image.url}}" alt="DP">
+                            {% if object.profile_image %}
+                                <img src="{{ object.profile_image.url }}" alt="DP">
+                            {% else %}
+                                <img src="{{ MEDIA_URL }}default.jpg" alt="Default DP">  <!-- Reference to default image -->
+                            {% endif %}
                             <div class="custom-upload">
                                 <div class="file-btn">
                                     <span class="d-none d-lg-inline-block"> <i class="icofont-camera"></i>
